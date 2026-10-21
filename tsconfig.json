@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,28 +24,76 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"],
-      "@/lib*": ["src/lib/*"],
-      "@/components*": ["src/app/components/*"],
-      "@/layout*": ["src/app/components/layout/*"],
-      "@/hooks/*": ["./src/app/hooks/*"],
-      "@/styles/*": ["./src/app/styles/*"],
-      "@/public/*": ["./src/app/public/*"],
-      "@/assets/*": ["./src/app/assets/*"],
-      "@/data/*": ["./src/app/data/*"],
-      "@/types/*": ["./src/app/types/*"],
-      "@/utils/*": ["./src/app/utils/*"],
-      "@/config/*": ["./src/app/config/*"],
-      "@/context/*": ["./src/app/context/*"],
-      "@/features/*": ["./src/app/features/*"],
-      "@/xpages/*": ["./src/app/xpages/*"],
-      "@/services/*": ["./src/app/services/*"],
-      "@/store/*": ["./src/app/store/*"],
-      "@/api/*": ["./src/app/api/*"],
-      "@/middleware/*": ["./src/app/middleware/*"],
-      "@/tests/*": ["./src/app/tests/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@/lib*": [
+        "src/lib/*"
+      ],
+      "@/components*": [
+        "src/app/components/*"
+      ],
+      "@/layout*": [
+        "src/app/components/layout/*"
+      ],
+      "@/hooks/*": [
+        "./src/app/hooks/*"
+      ],
+      "@/styles/*": [
+        "./src/app/styles/*"
+      ],
+      "@/public/*": [
+        "./src/app/public/*"
+      ],
+      "@/assets/*": [
+        "./src/app/assets/*"
+      ],
+      "@/data/*": [
+        "./src/app/data/*"
+      ],
+      "@/types/*": [
+        "./src/app/types/*"
+      ],
+      "@/utils/*": [
+        "./src/app/utils/*"
+      ],
+      "@/config/*": [
+        "./src/app/config/*"
+      ],
+      "@/context/*": [
+        "./src/app/context/*"
+      ],
+      "@/features/*": [
+        "./src/app/features/*"
+      ],
+      "@/xpages/*": [
+        "./src/app/xpages/*"
+      ],
+      "@/services/*": [
+        "./src/app/services/*"
+      ],
+      "@/store/*": [
+        "./src/app/store/*"
+      ],
+      "@/api/*": [
+        "./src/app/api/*"
+      ],
+      "@/middleware/*": [
+        "./src/app/middleware/*"
+      ],
+      "@/tests/*": [
+        "./src/app/tests/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "tests"
+  ]
 }

@@ -1,27 +1,21 @@
-# Sportsbooks
+# SportsBooks
 
-A typed odds comparison tool that calculates implied probabilities and potential arbitrage allocations from manually entered odds.
+A responsive, dark-first odds comparison workspace built with Next.js 15, React 19, and Tailwind CSS 4 via its PostCSS integration. Theme tokens are CSS variables; layout and components use Tailwind utilities. The light/dark preference persists locally and is applied before paint.
 
-[Live demo](https://jp-sportsbooks.vercel.app/)
-
-## What it does
-
-Enter odds for moneyline, puck line or totals markets to compare implied probabilities and calculate possible stake allocations. The app works with manually entered values; it does not fetch live bookmaker feeds or place bets. Calculations do not account for changing odds, fees, stake limits or differences in settlement rules.
-
-## Local development
-
-Run these commands from the repository root:
+## Run
 
 ```sh
-npm install
+npm ci
 npm run dev
+npm run build
+npm test
+npm run lint
 ```
 
-Available scripts:
+Deploy with Vercel's Next.js preset. No API keys or backend required.
 
-- `npm run build`: `next build`.
-- `npm run lint`: `next lint`.
+## Calculator
 
-## Main dependencies
+All displayed prices are editable examples, not live quotes. Compare moneyline, half-point spread/puck-line, and half-point totals across bookmakers. Decimal and American formats are supported. Best prices are selected per outcome; the allocated stake is rounded to cents and the minimum gross payout is computed from those rounded stakes. The net result subtracts the total stake. A non-positive edge is shown explicitly.
 
-`react`, `next`. See `package.json` for the full dependency list and versions.
+Only two exhaustive outcomes with matching event, line, and settlement rules are supported. Whole-point lines (possible pushes), fees, limits, and changing odds are not modelled. Sport/team changes relabel the hypothetical scenario, not fetch new prices. Changes to prices last for the current session; Reset prices restores the examples. No bets are placed.
