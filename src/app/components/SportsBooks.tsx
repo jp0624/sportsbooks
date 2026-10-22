@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Activity,
   ArrowUpRight,
@@ -12,7 +12,8 @@ import {
   Sun,
   Trash2,
 } from "lucide-react";
-import hockey from "@/data/teams/hockey.json";
+import FixturePicker from "./FixturePicker";
+import type {League,Fixture} from "@/lib/fixtures";
 import { allocate, parseOdds } from "@/lib/market";
 type Market = "Moneyline" | "Spread" | "Total";
 type Book = { name: string; prices: Record<Market, [string, string]> };
@@ -58,29 +59,6 @@ const samples: Book[] = [
     },
   },
 ];
-const teams: Record<string, string[]> = {
-  Hockey: hockey
-    .filter((t) => t.name !== "San Jose Sharks")
-    .map((t) => `${t.city} ${t.name}`),
-  Basketball: [
-    "Boston Celtics",
-    "New York Knicks",
-    "Toronto Raptors",
-    "Los Angeles Lakers",
-  ],
-  Football: [
-    "Buffalo Bills",
-    "Kansas City Chiefs",
-    "Philadelphia Eagles",
-    "San Francisco 49ers",
-  ],
-  Baseball: [
-    "Toronto Blue Jays",
-    "New York Yankees",
-    "Los Angeles Dodgers",
-    "Boston Red Sox",
-  ],
-};
 const money = (n: number) =>
   new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD" }).format(
     n,
@@ -89,8 +67,9 @@ const field =
   "w-full rounded-lg border bg-background px-3 py-3 text-sm font-medium";
 export default function Calculator() {
   const [dark, setDark] = useState(true),
-    [sport, setSport] = useState("Hockey"),
+    [sport, setSport] = useState("NHL"),
     [pair, setPair] = useState(["Toronto Maple Leafs", "Montréal Canadiens"]);
+  const selectFixture = useCallback((league:League,fixture:Fixture)=>{setSport(league);setPair([fixture.away,fixture.home])},[]);
   const [market, setMarket] = useState<Market>("Moneyline"),
     [format, setFormat] = useState<"decimal" | "american">("decimal"),
     [budget, setBudget] = useState("100"),
@@ -218,6 +197,7 @@ export default function Calculator() {
             editable prices
           </div>
         </section>
+        <FixturePicker onSelect={selectFixture}/>
         <section
           aria-label="Market setup"
           className="mb-7 rounded-2xl border bg-card p-5 sm:p-6"
@@ -228,42 +208,7 @@ export default function Calculator() {
               01 / Configure
             </span>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-[1fr_1.5fr_1.5fr_1fr_1fr]">
-            <label className="space-y-2 text-xs text-muted">
-              <span>Sport</span>
-              <select
-                className={field}
-                value={sport}
-                onChange={(e) => {
-                  setSport(e.target.value);
-                  setPair(teams[e.target.value].slice(0, 2));
-                }}
-              >
-                {Object.keys(teams).map((s) => (
-                  <option key={s}>{s}</option>
-                ))}
-              </select>
-            </label>
-            {[0, 1].map((i) => (
-              <label key={i} className="space-y-2 text-xs text-muted">
-                <span>Team {i + 1}</span>
-                <select
-                  className={field}
-                  value={pair[i]}
-                  onChange={(e) =>
-                    setPair((p) =>
-                      p.map((t, j) => (i === j ? e.target.value : t)),
-                    )
-                  }
-                >
-                  {Array.from(new Set([...teams[sport], ...pair])).map((t) => (
-                    <option key={t} disabled={t === pair[1 - i]}>
-                      {t}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ))}
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
             <label className="space-y-2 text-xs text-muted">
               <span>Total stake · CAD</span>
               <input
@@ -327,7 +272,7 @@ export default function Calculator() {
                     }}
                     className={`rounded-md px-3 py-2 text-xs font-semibold sm:px-4 ${market === m ? "bg-accent text-accent-foreground" : "text-muted hover:text-foreground"}`}
                   >
-                    {m === "Spread" && sport === "Hockey" ? "Puck line" : m}
+                    {m === "Spread" && sport === "NHL" ? "Puck line" : m}
                   </button>
                 ))}
               </div>
