@@ -12,6 +12,7 @@ import {
   Sun,
   Trash2,
 } from "lucide-react";
+import SportsHero from "./SportsHero";
 import FixturePicker from "./FixturePicker";
 import type {League,Fixture} from "@/lib/fixtures";
 import { allocate, parseOdds } from "@/lib/market";
@@ -64,7 +65,7 @@ const money = (n: number) =>
     n,
   );
 const field =
-  "w-full rounded-lg border bg-background px-3 py-3 text-sm font-medium";
+  "w-full border bg-background px-3 py-3 text-sm font-medium";
 export default function Calculator() {
   const [dark, setDark] = useState(true),
     [sport, setSport] = useState("NHL"),
@@ -153,7 +154,7 @@ export default function Calculator() {
             href="/home"
             className="flex items-center gap-3 font-bold tracking-tight"
           >
-            <span className="rounded-xl bg-accent p-2 text-accent-foreground">
+            <span className="bg-accent p-2 text-accent-foreground">
               <Activity size={22} />
             </span>
             <span className="text-xl">
@@ -167,40 +168,22 @@ export default function Calculator() {
             <button
               onClick={toggle}
               aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-              className="rounded-full border p-3 hover:bg-background"
+              className="border p-3 hover:bg-background"
             >
               {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
         </div>
       </header>
+      <SportsHero />
       <main
         id="workspace"
         className="mx-auto max-w-[1440px] px-5 py-8 sm:px-9 sm:py-12"
       >
-        <section className="mb-9 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em] text-accent">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Clarity in
-              every line
-            </p>
-            <h1 className="text-4xl font-semibold tracking-[-.045em] sm:text-5xl">
-              Find your edge.
-            </h1>
-            <p className="mt-4 max-w-xl text-sm leading-6 text-muted">
-              One workspace to compare odds, balance stakes, and understand the
-              numbers behind every outcome.
-            </p>
-          </div>
-          <div className="flex items-center gap-2 self-start rounded-full border px-4 py-2 text-xs text-muted md:self-auto">
-            <span className="h-2 w-2 rounded-full bg-amber-400" /> Sample data ·
-            editable prices
-          </div>
-        </section>
         <FixturePicker onSelect={selectFixture}/>
         <section
           aria-label="Market setup"
-          className="mb-7 rounded-2xl border bg-card p-5 sm:p-6"
+          className="mb-7 border bg-card p-5 sm:p-6"
         >
           <div className="mb-5 flex items-center gap-2 text-sm font-semibold">
             <SlidersHorizontal size={16} className="text-accent" /> Market setup
@@ -241,7 +224,7 @@ export default function Calculator() {
           )}
         </section>
         <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_350px]">
-          <section className="min-w-0 rounded-2xl border bg-card">
+          <section className="min-w-0 border bg-card">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b p-5 sm:p-6">
               <div>
                 <h2 className="text-lg font-semibold">Odds comparison</h2>
@@ -251,14 +234,14 @@ export default function Calculator() {
               </div>
               <button
                 onClick={reset}
-                className="flex items-center gap-2 rounded-lg border px-3 py-2 text-xs hover:bg-background"
+                className="flex items-center gap-2 border px-3 py-2 text-xs hover:bg-background"
               >
                 <RotateCcw size={14} /> Reset prices
               </button>
             </div>
             <div className="flex flex-wrap items-center gap-3 px-5 py-5 sm:px-6">
               <div
-                className="flex rounded-lg bg-background p-1"
+                className="flex bg-background p-1"
                 role="group"
                 aria-label="Market"
               >
@@ -270,7 +253,7 @@ export default function Calculator() {
                       setMarket(m);
                       setLine(m === "Spread" ? "1.5" : "6.5");
                     }}
-                    className={`rounded-md px-3 py-2 text-xs font-semibold sm:px-4 ${market === m ? "bg-accent text-accent-foreground" : "text-muted hover:text-foreground"}`}
+                    className={`px-3 py-2 text-xs font-semibold sm:px-4 ${market === m ? "bg-accent text-accent-foreground" : "text-muted hover:text-foreground"}`}
                   >
                     {m === "Spread" && sport === "NHL" ? "Puck line" : m}
                   </button>
@@ -281,7 +264,7 @@ export default function Calculator() {
                   Line
                   <input
                     aria-label="Market line"
-                    className="w-20 rounded-lg border bg-background p-2"
+                    className="w-20 border bg-background p-2"
                     type="number"
                     min="0.5"
                     step="1"
@@ -309,7 +292,7 @@ export default function Calculator() {
                   className="grid gap-4 p-5 sm:grid-cols-[1.15fr_1fr_1fr] sm:items-center sm:px-6"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border bg-background text-xs font-bold text-muted">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center border bg-background text-xs font-bold text-muted">
                       {b.name
                         .split(" ")
                         .map((n) => n[0])
@@ -340,7 +323,7 @@ export default function Calculator() {
                             {labels[i]}
                           </span>
                           <div
-                            className={`flex items-center rounded-lg border px-3 ${win ? "border-accent/40 bg-accent/10" : "bg-background"}`}
+                            className={`flex items-center border px-3 ${win ? "border-accent/40 bg-accent/10" : "bg-background"}`}
                           >
                             <input
                               aria-label={`${b.name} ${labels[i]} odds`}
@@ -423,12 +406,12 @@ export default function Calculator() {
                     maxLength={40}
                     aria-label="Bookmaker name"
                     placeholder="Bookmaker name"
-                    className="min-w-0 flex-1 rounded-lg border bg-background px-3 py-2 text-sm"
+                    className="min-w-0 flex-1 border bg-background px-3 py-2 text-sm"
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                   />
                   <button
-                    className="rounded-lg bg-accent px-4 py-2 text-sm text-accent-foreground"
+                    className="bg-accent px-4 py-2 text-sm text-accent-foreground"
                     disabled={
                       !newName.trim() ||
                       books.some(
@@ -458,7 +441,7 @@ export default function Calculator() {
             </div>
           </section>
           <aside className="space-y-5 xl:sticky xl:top-6">
-            <section className="overflow-hidden rounded-2xl border border-accent/30 bg-card">
+            <section className="overflow-hidden border border-accent/30 bg-card">
               <div className="border-b border-accent/20 bg-accent/5 p-6">
                 <p className="flex items-center gap-2 text-xs uppercase tracking-wider text-accent">
                   <Activity size={14} /> Market intelligence
@@ -510,9 +493,9 @@ export default function Calculator() {
                         {result ? money(result.stakes[i]) : "—"}
                       </span>
                     </div>
-                    <div className="h-1.5 rounded-full bg-background">
+                    <div className="h-1.5 bg-background">
                       <div
-                        className={`h-full rounded-full ${i === 0 ? "bg-accent" : "bg-emerald-600"}`}
+                        className={`h-full ${i === 0 ? "bg-accent" : "bg-[#ffbe11]"}`}
                         style={{
                           width: result
                             ? `${(result.stakes[i] / Number(budget)) * 100}%`
@@ -538,7 +521,7 @@ export default function Calculator() {
                 </dl>
               </div>
             </section>
-            <section className="rounded-2xl border p-5">
+            <section className="border p-5">
               <h3 className="flex items-center gap-2 text-sm font-semibold">
                 <Check size={16} className="text-accent" /> Know the assumptions
               </h3>

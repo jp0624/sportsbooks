@@ -11,23 +11,23 @@
   --font-sans: Arial, Helvetica, sans-serif;
 }
 :root {
-  --background: #f1f4f3;
-  --foreground: #172822;
+  --background: #f7f7fa;
+  --foreground: #10141a;
   --card: #ffffff;
-  --muted: #566b62;
-  --border: #d5dfda;
-  --accent: #176b48;
+  --muted: #4b5563;
+  --border: #cbd1da;
+  --accent: #007aa8;
   --accent-foreground: #ffffff;
   color-scheme: light;
 }
 .dark {
-  --background: #0b1110;
-  --foreground: #e7efeb;
-  --card: #121b17;
-  --muted: #9aada3;
-  --border: #28372e;
-  --accent: #b7f969;
-  --accent-foreground: #14220b;
+  --background: #0b0d10;
+  --foreground: #f7f7fa;
+  --card: #15191f;
+  --muted: #b8c2ce;
+  --border: #3b4654;
+  --accent: #14aff1;
+  --accent-foreground: #000000;
   color-scheme: dark;
 }
 @layer base {
@@ -59,7 +59,10 @@
     opacity: 0.5;
   }
   ::selection {
-    background: #72a743;
+    background: #007aa8;
     color: white;
   }
 }
+
+/* Square geometry is shared by all controls, panels and native fields. */
+*, *::before, *::after { border-radius: 0 !important; }

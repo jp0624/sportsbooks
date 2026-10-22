@@ -31,7 +31,7 @@ const SportsbookTable: React.FC<Props> = ({
   onOddsChange,
 }) => {
   return (
-    <div className="flex flex-row bg-slate-100 items-center border shadow-slate-300 shadow-md border-slate-300 justify-center w-[90%] mx-25 my-2.5 px-5 rounded-lg gap-5">
+    <div className="flex flex-row bg-slate-100 items-center border shadow-slate-300 shadow-md border-slate-300 justify-center w-[90%] mx-25 my-2.5 px-5 gap-5">
       <div className="h-25 w-[20%] flex flex-col mx-auto my-5 justify-center items-center">
         {sportsBook.logo ? (
           <Image
@@ -46,13 +46,13 @@ const SportsbookTable: React.FC<Props> = ({
             height={64}
           />
         ) : (
-          <span className="rounded-lg">{sportsBook.name}</span>
+          <span className="">{sportsBook.name}</span>
         )}
       </div>
 
       <table
         data-testid="sportsbook-table"
-        className="h-25 bg-slate-100 w-[80%] mx-auto my-5 rounded-lg"
+        className="h-25 bg-slate-100 w-[80%] mx-auto my-5 "
       >
         <thead className="sportsbook-table__head">
           <tr>
@@ -117,7 +117,7 @@ const SportsbookTable: React.FC<Props> = ({
                               value?.label === "Over" ? "Under" : "Over"
                             )
                           }
-                          className={`cursor-pointer text-sm mr-2 w-10 h-5 block ml-2 rounded-sm text-center text-white ${
+                          className={`cursor-pointer text-sm mr-2 w-10 h-5 block ml-2 text-center text-white ${
                             value?.label === "Over"
                               ? "bg-slate-600"
                               : "bg-red-600"
@@ -154,7 +154,7 @@ const SportsbookTable: React.FC<Props> = ({
                           }
                         }}
                       />
-                      <div className="text-[.65rem] px-2 ml-2 font-bold bg-slate-300 justify-center items-center mr-1 w-12 rounded-sm p-0.5 border-l-2 ml-0.5 flex text-slate-600">
+                      <div className="text-[.65rem] px-2 ml-2 font-bold bg-slate-300 justify-center items-center mr-1 w-12 p-0.5 border-l-2 ml-0.5 flex text-slate-600">
                         {displaySpan}
                       </div>
                     </div>
@@ -201,3 +201,4 @@ const SportsbookTable: React.FC<Props> = ({
 };
 
 export default SportsbookTable;
+

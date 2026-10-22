@@ -136,7 +136,7 @@ function ArbitrageResults({
       {results.map((result) => (
         <div
           key={result.betType}
-          className="bg-green-50 border border-green-400 p-4 rounded-lg shadow-md my-4"
+          className="bg-green-50 border border-green-400 p-4 shadow-md my-4"
         >
           <h2 className="text-xl font-semibold mb-2">
             {result.betType} Arbitrage Opportunity
@@ -166,3 +166,4 @@ function ArbitrageResults({
 }
 
 export default ArbitrageResults;
+
